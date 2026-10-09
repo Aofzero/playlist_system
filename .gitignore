@@ -1,0 +1,11 @@
+# ข้อมูลลูกค้า — ห้ามขึ้น repo
+*.xlsx
+*.xlsm
+*.xls
+*.csv
+*.txt
+*.zip
+# ไฟล์ระบบ
+.DS_Store
+Thumbs.db
+~$*
