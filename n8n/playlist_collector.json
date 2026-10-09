@@ -8,7 +8,7 @@
         "width": 640,
         "color": 4
       },
-      "id": "0d5db25d-91a3-4114-8ac0-c60d6fedc9b1",
+      "id": "a7ebd70f-eff1-481c-b15d-b805b062842b",
       "name": "คำอธิบาย",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -28,7 +28,7 @@
           ]
         }
       },
-      "id": "94996ba5-a733-4cf5-abb9-3e3907c4372a",
+      "id": "0f3300e0-8b91-4521-900f-a3569d004074",
       "name": "ทุกเช้า 8:00–12:00",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
@@ -39,9 +39,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// ===== ตั้งค่า: แก้ 3 ค่านี้ครั้งเดียว =====\nreturn [{\n  json: {\n    // อีเมลที่จะรับแจ้งเตือนเมื่อได้ไฟล์ใหม่ / ครบ 11 ไฟล์ — หลายคนคั่นด้วยจุลภาค เช่น 'a@company.com, b@company.com'\n    notifyEmail: 'ใส่อีเมลของคุณ@example.com',\n    // ID โฟลเดอร์ Google Drive ที่จะเก็บ Playlist (ดูจากลิงก์โฟลเดอร์: drive.google.com/drive/folders/<ID>)\n    parentFolderId: 'ใส่_ID_โฟลเดอร์_Google_Drive',\n    // ใส่อีเมลผู้ส่ง Playlist ถ้ามี (คั่นด้วย OR) เช่น 'a@company.com OR b@company.com' — เว้นว่าง = ดูทุกอีเมลที่มีไฟล์ Excel แนบ\n    fromFilter: '',\n    // Playlist 11 แบบที่ระบบเติมใบเช็ครูปต้องใช้ (ชื่อ + รูปแบบชื่อไฟล์)\n    kinds: [\n      { name: 'แยกจอ 40Blue', pattern: 'แยกจอ.*40\\\\s*Blue' },\n      { name: 'แยกจอ 40Red', pattern: 'แยกจอ.*40\\\\s*Red' },\n      { name: 'แยกจอ 80Blue', pattern: 'แยกจอ.*80\\\\s*Blue' },\n      { name: 'แยกจอ 80Red', pattern: 'แยกจอ.*80\\\\s*Red' },\n      { name: 'แยกจอ CITY', pattern: 'แยกจอ.*CITY' },\n      { name: 'แยกจอ Spare', pattern: 'แยกจอ.*Spare' },\n      { name: 'Signature Max', pattern: 'Signature.?Max' },\n      { name: 'Show DC', pattern: 'Show\\\\s*DC' },\n      { name: 'BKJ1', pattern: 'BKJ\\\\s*1' },\n      { name: 'BKJ2', pattern: 'BKJ\\\\s*2' },\n      { name: 'Metro LED', pattern: 'Metro\\\\s*LED' },\n    ],\n  },\n}];\n"
+        "jsCode": "// ===== ตั้งค่า: แก้ 3 ค่านี้ครั้งเดียว =====\nreturn [{\n  json: {\n    // อีเมลที่จะรับแจ้งเตือนเมื่อได้ไฟล์ใหม่ / ครบ 11 ไฟล์ — หลายคนคั่นด้วยจุลภาค เช่น 'a@company.com, b@company.com'\n    notifyEmail: 'ใส่อีเมลของคุณ@example.com',\n    // ID โฟลเดอร์ Google Drive ที่จะเก็บ Playlist (ดูจากลิงก์โฟลเดอร์: drive.google.com/drive/folders/<ID>)\n    parentFolderId: 'ใส่_ID_โฟลเดอร์_Google_Drive',\n    // ใส่อีเมลผู้ส่ง Playlist ถ้ามี (คั่นด้วย OR) เช่น 'a@company.com OR b@company.com' — เว้นว่าง = ดูทุกอีเมลที่มีไฟล์ Excel แนบ\n    fromFilter: '',\n    // Playlist 11 แบบที่ระบบเติมใบเช็ครูปต้องใช้ (ชื่อ + รูปแบบชื่อไฟล์)\n    kinds: [\n      { name: 'แยกจอ 40Blue', pattern: '40\\\\s*Blue' },\n      { name: 'แยกจอ 40Red', pattern: '40\\\\s*Red' },\n      { name: 'แยกจอ 80Blue', pattern: '80\\\\s*Blue' },\n      { name: 'แยกจอ 80Red', pattern: '80\\\\s*Red' },\n      { name: 'แยกจอ CITY', pattern: 'แยกจอ.*CITY|[_\\\\s]CITY[_\\\\s.]' },\n      { name: 'แยกจอ Spare', pattern: 'Spare' },\n      { name: 'Signature Max', pattern: 'Signature' },\n      { name: 'Show DC', pattern: 'Show\\\\s*DC' },\n      { name: 'BKJ1', pattern: 'BKJ\\\\s*1' },\n      { name: 'BKJ2', pattern: 'BKJ\\\\s*2' },\n      { name: 'Metro LED', pattern: 'Metro' },\n    ],\n  },\n}];\n"
       },
-      "id": "2a23f8b2-7f32-4c7a-a548-e614acc9d092",
+      "id": "d70219e1-a15c-4c05-8020-369b7c7158a7",
       "name": "ตั้งค่า",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -63,7 +63,7 @@
           "dataPropertyAttachmentsPrefixName": "attachment_"
         }
       },
-      "id": "7def8f97-58cb-42fb-ac8c-7ab8bd9b0278",
+      "id": "51b5a765-607b-40a3-987e-35fd32cd317a",
       "name": "อีเมลที่มีไฟล์ Excel วันนี้",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
@@ -74,9 +74,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// คัดไฟล์ Playlist 11 แบบจากอีเมลวันนี้ เลือกไฟล์ล่าสุดของแต่ละแบบ และข้ามไฟล์ที่อัปโหลดไปแล้ววันนี้\nconst cfg = $('ตั้งค่า').first().json;\nconst kinds = cfg.kinds.map(k => ({ name: k.name, re: new RegExp(k.pattern, 'i') }));\nconst sd = $getWorkflowStaticData('global');\nconst today = $now.setZone('Asia/Bangkok').toFormat('yyyy-MM-dd');\nif (sd.day !== today) { sd.day = today; sd.sent = {}; sd.folderId = ''; }\n\nconst best = {};\nfor (const item of $input.all()) {\n  const when = new Date(item.json.date || 0).getTime() || 0;\n  for (const [prop, bin] of Object.entries(item.binary || {})) {\n    const name = (bin.fileName || '').normalize('NFC');\n    if (!/\\.xlsx?$/i.test(name)) continue;\n    const kind = kinds.find(k => k.re.test(name));\n    if (!kind) continue;\n    const key = kind.name + '|' + name + '|' + (bin.fileSize || '');\n    if (!best[kind.name] || when >= best[kind.name].when) {\n      best[kind.name] = { kind: kind.name, name, key, when, prop, item };\n    }\n  }\n}\n\nconst out = [];\nfor (const b of Object.values(best)) {\n  if (sd.sent[b.key]) continue; // อัปโหลดไปแล้ววันนี้\n  out.push({\n    json: { kind: b.kind, fileName: b.name, key: b.key, folderId: sd.folderId || '' },\n    binary: { data: b.item.binary[b.prop] },\n  });\n}\nreturn out;\n"
+        "jsCode": "// คัดไฟล์ Playlist 11 แบบจากอีเมลวันนี้ เลือกไฟล์ล่าสุดของแต่ละแบบ และข้ามไฟล์ที่อัปโหลดไปแล้ววันนี้\nconst cfg = $('ตั้งค่า').first().json;\nconst kinds = cfg.kinds.map(k => ({ name: k.name, re: new RegExp(k.pattern, 'i') }));\nconst sd = $getWorkflowStaticData('global');\nconst today = $now.setZone('Asia/Bangkok').toFormat('yyyy-MM-dd');\nif (sd.day !== today) { sd.day = today; sd.sent = {}; sd.folderId = ''; }\n\nconst best = {};\nconst others = new Set(); // ไฟล์ Excel ที่ชื่อไม่ตรง 11 แบบ\nfor (const item of $input.all()) {\n  const when = new Date(item.json.date || 0).getTime() || 0;\n  for (const [prop, bin] of Object.entries(item.binary || {})) {\n    const name = (bin.fileName || '').normalize('NFC');\n    if (!/\\.xlsx?$/i.test(name)) continue;\n    const kind = kinds.find(k => k.re.test(name));\n    if (!kind) { others.add(name); continue; }\n    const key = kind.name + '|' + name + '|' + (bin.fileSize || '');\n    if (!best[kind.name] || when >= best[kind.name].when) {\n      best[kind.name] = { kind: kind.name, name, key, when, prop, item };\n    }\n  }\n}\n\nsd.others = [...others];\n\nconst out = [];\nfor (const b of Object.values(best)) {\n  if (sd.sent[b.key]) continue; // อัปโหลดไปแล้ววันนี้\n  out.push({\n    json: { kind: b.kind, fileName: b.name, key: b.key, folderId: sd.folderId || '' },\n    binary: { data: b.item.binary[b.prop] },\n  });\n}\nreturn out;\n"
       },
-      "id": "def78d9c-3522-4626-89e1-e9ecd339c057",
+      "id": "0036504c-20b5-4b40-9c05-099bed589595",
       "name": "คัดไฟล์ Playlist",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -95,7 +95,7 @@
           },
           "conditions": [
             {
-              "id": "ca1c10b9-7834-4789-a37e-d734af16f163",
+              "id": "93462bdf-d196-4c2f-bea4-dea42722dc90",
               "leftValue": "={{ $json.folderId }}",
               "rightValue": "",
               "operator": {
@@ -109,7 +109,7 @@
         },
         "options": {}
       },
-      "id": "4e9f6907-7203-4dc2-8de1-37b6831abd92",
+      "id": "1732a77f-87f4-4cb8-941d-f46dd7c6aecc",
       "name": "มีโฟลเดอร์วันนี้แล้ว?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
@@ -136,7 +136,7 @@
         },
         "options": {}
       },
-      "id": "a228413a-5879-4f4a-a94c-e021ef67cf8c",
+      "id": "0ac40db1-2a38-4fd5-a9fc-5cdb72491d65",
       "name": "สร้างโฟลเดอร์วันนี้",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
@@ -150,7 +150,7 @@
       "parameters": {
         "jsCode": "// จำ ID โฟลเดอร์ของวันนี้ แล้วส่งไฟล์ทั้งหมดต่อไปอัปโหลด\nconst sd = $getWorkflowStaticData('global');\nconst folderId = $input.first().json.id;\nsd.folderId = folderId;\nreturn $('คัดไฟล์ Playlist').all().map(i => ({\n  json: { ...i.json, folderId },\n  binary: i.binary,\n}));\n"
       },
-      "id": "c731997b-0a59-47c8-902b-7836aeceb559",
+      "id": "09a0e0e1-d245-433c-a3a1-26adcfe8c39c",
       "name": "จำโฟลเดอร์วันนี้",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -178,7 +178,7 @@
         "inputDataFieldName": "data",
         "options": {}
       },
-      "id": "d1449266-385f-4bda-8d20-258c135f8b8e",
+      "id": "8fb366dd-5e94-48e2-b9c5-b167ccfa9aae",
       "name": "อัปโหลดลง Google Drive",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
@@ -189,9 +189,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// บันทึกว่าอัปโหลดไฟล์ไหนแล้ว และเขียนอีเมลสรุปว่าวันนี้ได้ครบ 11 ไฟล์หรือยัง\nconst cfg = $('ตั้งค่า').first().json;\nconst sd = $getWorkflowStaticData('global');\nconst picked = $('คัดไฟล์ Playlist').all();\nconst before = new Set(Object.values(sd.sent));\nconst replaced = picked.filter(p => before.has(p.json.kind)).map(p => p.json.kind);\nfor (const p of picked) sd.sent[p.json.key] = p.json.kind;\n\nconst all = cfg.kinds.map(k => k.name);\nconst have = new Set(Object.values(sd.sent));\nconst missing = all.filter(k => !have.has(k));\nconst day = $now.setZone('Asia/Bangkok').setLocale('th').toFormat('d LLL yyyy');\nconst link = 'https://drive.google.com/drive/folders/' + sd.folderId;\nconst esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');\n\nconst status = missing.length\n  ? `<p>ยังขาด <b>${missing.length}</b> ไฟล์: ${missing.map(esc).join(', ')}</p><p>ระบบจะเช็กอีเมลอีกครั้งในชั่วโมงถัดไป (ถึง 12:00)</p>`\n  : `<p><b>ครบ 11 ไฟล์แล้ว</b> ดาวน์โหลดทั้งโฟลเดอร์ แล้วลากลงระบบเติมใบเช็ครูปได้เลย</p>`;\n\nconst html = `<div style=\"font-family:Tahoma,sans-serif;font-size:15px;line-height:1.6\">\n<p>Playlist วันที่ ${esc(day)} — ได้แล้ว <b>${have.size}/${all.length}</b> ไฟล์</p>\n<p>ไฟล์ที่เพิ่งเข้าโฟลเดอร์รอบนี้:</p>\n<ul>${picked.map(p => `<li>${esc(p.json.kind)}: ${esc(p.json.fileName)}</li>`).join('')}</ul>\n${status}\n${replaced.length ? `<p style=\"color:#b35a14\"><b>มีไฟล์ฉบับใหม่เข้ามาแทน:</b> ${replaced.map(esc).join(', ')} — ลบไฟล์เก่าของแบบนี้ในโฟลเดอร์ก่อนนำไปใช้</p>` : ''}\n<p><a href=\"${link}\">เปิดโฟลเดอร์ Google Drive ของวันนี้</a></p>\n</div>`;\n\nreturn [{\n  json: {\n    to: cfg.notifyEmail,\n    subject: `Playlist ${day}: ${have.size}/${all.length} ไฟล์` + (missing.length ? ' (ยังไม่ครบ)' : ' — ครบแล้ว'),\n    html,\n  },\n}];\n"
+        "jsCode": "// บันทึกว่าอัปโหลดไฟล์ไหนแล้ว และเขียนอีเมลสรุปว่าวันนี้ได้ครบ 11 ไฟล์หรือยัง\nconst cfg = $('ตั้งค่า').first().json;\nconst sd = $getWorkflowStaticData('global');\nconst picked = $('คัดไฟล์ Playlist').all();\nconst before = new Set(Object.values(sd.sent));\nconst replaced = picked.filter(p => before.has(p.json.kind)).map(p => p.json.kind);\nfor (const p of picked) sd.sent[p.json.key] = p.json.kind;\n\nconst all = cfg.kinds.map(k => k.name);\nconst have = new Set(Object.values(sd.sent));\nconst missing = all.filter(k => !have.has(k));\nconst day = $now.setZone('Asia/Bangkok').setLocale('th').toFormat('d LLL yyyy');\nconst link = 'https://drive.google.com/drive/folders/' + sd.folderId;\nconst esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');\n\nconst status = missing.length\n  ? `<p>ยังขาด <b>${missing.length}</b> ไฟล์: ${missing.map(esc).join(', ')}</p><p>ระบบจะเช็กอีเมลอีกครั้งในชั่วโมงถัดไป (ถึง 12:00)</p>`\n  : `<p><b>ครบ 11 ไฟล์แล้ว</b> ดาวน์โหลดทั้งโฟลเดอร์ แล้วลากลงระบบเติมใบเช็ครูปได้เลย</p>`;\n\nconst html = `<div style=\"font-family:Tahoma,sans-serif;font-size:15px;line-height:1.6\">\n<p>Playlist วันที่ ${esc(day)} — ได้แล้ว <b>${have.size}/${all.length}</b> ไฟล์</p>\n<p>ไฟล์ที่เพิ่งเข้าโฟลเดอร์รอบนี้:</p>\n<ul>${picked.map(p => `<li>${esc(p.json.kind)}: ${esc(p.json.fileName)}</li>`).join('')}</ul>\n${status}\n${replaced.length ? `<p style=\"color:#b35a14\"><b>มีไฟล์ฉบับใหม่เข้ามาแทน:</b> ${replaced.map(esc).join(', ')} — ลบไฟล์เก่าของแบบนี้ในโฟลเดอร์ก่อนนำไปใช้</p>` : ''}\n${(sd.others || []).length ? `<p style=\"color:#586274\">ไฟล์ Excel อื่นในอีเมลวันนี้ (ไม่ได้เก็บ เพราะชื่อไม่ตรง 11 แบบ):</p><ul style=\"color:#586274\">${sd.others.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}\n<p><a href=\"${link}\">เปิดโฟลเดอร์ Google Drive ของวันนี้</a></p>\n</div>`;\n\nreturn [{\n  json: {\n    to: cfg.notifyEmail,\n    subject: `Playlist ${day}: ${have.size}/${all.length} ไฟล์` + (missing.length ? ' (ยังไม่ครบ)' : ' — ครบแล้ว'),\n    html,\n  },\n}];\n"
       },
-      "id": "13b3e99a-009b-4097-b44a-5e9d7106527f",
+      "id": "763dc605-3094-407a-8944-66b6a82a8bbc",
       "name": "สรุปผล",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -210,7 +210,7 @@
           "appendAttribution": false
         }
       },
-      "id": "c8a8ddf7-c87b-4c73-aa75-ab9efeee2423",
+      "id": "8e8ffc45-dd8c-4315-b35b-400a5a8ae9d8",
       "name": "แจ้งเตือนทางอีเมล",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
