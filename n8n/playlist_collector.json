@@ -3,12 +3,12 @@
   "nodes": [
     {
       "parameters": {
-        "content": "## รวบรวม Playlist ประจำวันอัตโนมัติ\nทุกวัน 8:00–12:00 (ทุกชั่วโมง) เช็ก Gmail หาไฟล์ Playlist ทั้ง 11 แบบ → เก็บลงโฟลเดอร์ Google Drive ของวันนั้น → อีเมลบอกว่าได้กี่ไฟล์ ขาดไฟล์ไหน\n\n**ตั้งค่าครั้งแรก**\n1. เลือก Gmail credential ใน 2 โหนดอีเมล และ Google Drive credential ใน 2 โหนด Drive\n2. เปิดโหนด **ตั้งค่า** ใส่อีเมลรับแจ้งเตือน และ ID โฟลเดอร์ Google Drive\n3. กด Test workflow 1 ครั้ง แล้วลบโฟลเดอร์ทดสอบใน Drive\n4. กด **Active** เพื่อเปิดใช้งานจริง\n\nระบบนี้ไม่ได้เติมใบเช็ครูป — ดาวน์โหลดโฟลเดอร์ของวันนั้น แล้วลากลง playlist_system.html ตามปกติ",
+        "content": "## รวบรวม Playlist ประจำวันอัตโนมัติ\nทุกชั่วโมง 7:00–18:00 เช็ก Gmail (อีเมล 2 วันล่าสุด) หาไฟล์ Playlist ของวันนี้ทั้ง 11 แบบ (ดูวันที่จากชื่อไฟล์) → เก็บลงโฟลเดอร์ Google Drive ของวันนั้น → อีเมลบอกว่าได้กี่แบบ ขาดแบบไหน\n\n**ตั้งค่าครั้งแรก**\n1. เลือก Gmail credential ใน 2 โหนดอีเมล และ Google Drive credential ใน 2 โหนด Drive\n2. เปิดโหนด **ตั้งค่า** ใส่อีเมลรับแจ้งเตือน และ ID โฟลเดอร์ Google Drive\n3. กด Test workflow 1 ครั้ง แล้วลบโฟลเดอร์ทดสอบใน Drive\n4. กด **Active** เพื่อเปิดใช้งานจริง\n\nระบบนี้ไม่ได้เติมใบเช็ครูป — ดาวน์โหลดโฟลเดอร์ของวันนั้น แล้วลากลง playlist_system.html ตามปกติ",
         "height": 420,
         "width": 640,
         "color": 4
       },
-      "id": "a7ebd70f-eff1-481c-b15d-b805b062842b",
+      "id": "9c022c9d-3f73-401f-8714-3f3eeecd3a42",
       "name": "คำอธิบาย",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -23,13 +23,13 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "0 8-12 * * *"
+              "expression": "0 7-18 * * *"
             }
           ]
         }
       },
-      "id": "0f3300e0-8b91-4521-900f-a3569d004074",
-      "name": "ทุกเช้า 8:00–12:00",
+      "id": "655eab9d-fe80-43a0-aee2-b075b1ae64d4",
+      "name": "ทุกชั่วโมง 7:00–18:00",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
@@ -41,7 +41,7 @@
       "parameters": {
         "jsCode": "// ===== ตั้งค่า: แก้ 3 ค่านี้ครั้งเดียว =====\nreturn [{\n  json: {\n    // อีเมลที่จะรับแจ้งเตือนเมื่อได้ไฟล์ใหม่ / ครบ 11 ไฟล์ — หลายคนคั่นด้วยจุลภาค เช่น 'a@company.com, b@company.com'\n    notifyEmail: 'ใส่อีเมลของคุณ@example.com',\n    // ID โฟลเดอร์ Google Drive ที่จะเก็บ Playlist (ดูจากลิงก์โฟลเดอร์: drive.google.com/drive/folders/<ID>)\n    parentFolderId: 'ใส่_ID_โฟลเดอร์_Google_Drive',\n    // ใส่อีเมลผู้ส่ง Playlist ถ้ามี (คั่นด้วย OR) เช่น 'a@company.com OR b@company.com' — เว้นว่าง = ดูทุกอีเมลที่มีไฟล์ Excel แนบ\n    fromFilter: '',\n    // Playlist 11 แบบที่ระบบเติมใบเช็ครูปต้องใช้ (ชื่อ + รูปแบบชื่อไฟล์)\n    kinds: [\n      { name: 'แยกจอ 40Blue', pattern: '40\\\\s*Blue' },\n      { name: 'แยกจอ 40Red', pattern: '40\\\\s*Red' },\n      { name: 'แยกจอ 80Blue', pattern: '80\\\\s*Blue' },\n      { name: 'แยกจอ 80Red', pattern: '80\\\\s*Red' },\n      { name: 'แยกจอ CITY', pattern: 'แยกจอ.*CITY|[_\\\\s]CITY[_\\\\s.]' },\n      { name: 'แยกจอ Spare', pattern: 'Spare' },\n      { name: 'Signature Max', pattern: 'Signature' },\n      { name: 'Show DC', pattern: 'Show\\\\s*DC' },\n      { name: 'BKJ1', pattern: 'BKJ\\\\s*1' },\n      { name: 'BKJ2', pattern: 'BKJ\\\\s*2' },\n      { name: 'Metro LED', pattern: 'Metro' },\n    ],\n  },\n}];\n"
       },
-      "id": "d70219e1-a15c-4c05-8020-369b7c7158a7",
+      "id": "0028623b-1f39-4f73-a6c4-31b81cca1173",
       "name": "ตั้งค่า",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -56,15 +56,15 @@
         "returnAll": true,
         "simple": false,
         "filters": {
-          "q": "={{ 'has:attachment filename:xlsx after:' + Math.floor($now.setZone('Asia/Bangkok').startOf('day').toSeconds()) + ($json.fromFilter ? ' from:(' + $json.fromFilter + ')' : '') }}"
+          "q": "={{ 'has:attachment filename:xlsx after:' + Math.floor($now.setZone('Asia/Bangkok').startOf('day').minus({ days: 1 }).toSeconds()) + ($json.fromFilter ? ' from:(' + $json.fromFilter + ')' : '') }}"
         },
         "options": {
           "downloadAttachments": true,
           "dataPropertyAttachmentsPrefixName": "attachment_"
         }
       },
-      "id": "51b5a765-607b-40a3-987e-35fd32cd317a",
-      "name": "อีเมลที่มีไฟล์ Excel วันนี้",
+      "id": "cb6c583a-89f1-4d54-b24e-ab50373eee43",
+      "name": "อีเมลที่มีไฟล์ Excel 2 วันล่าสุด",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
@@ -74,9 +74,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// คัดไฟล์ Playlist 11 แบบจากอีเมลวันนี้ เลือกไฟล์ล่าสุดของแต่ละแบบ และข้ามไฟล์ที่อัปโหลดไปแล้ววันนี้\nconst cfg = $('ตั้งค่า').first().json;\nconst kinds = cfg.kinds.map(k => ({ name: k.name, re: new RegExp(k.pattern, 'i') }));\nconst sd = $getWorkflowStaticData('global');\nconst today = $now.setZone('Asia/Bangkok').toFormat('yyyy-MM-dd');\nif (sd.day !== today) { sd.day = today; sd.sent = {}; sd.folderId = ''; }\n\nconst best = {};\nconst others = new Set(); // ไฟล์ Excel ที่ชื่อไม่ตรง 11 แบบ\nfor (const item of $input.all()) {\n  const when = new Date(item.json.date || 0).getTime() || 0;\n  for (const [prop, bin] of Object.entries(item.binary || {})) {\n    const name = (bin.fileName || '').normalize('NFC');\n    if (!/\\.xlsx?$/i.test(name)) continue;\n    const kind = kinds.find(k => k.re.test(name));\n    if (!kind) { others.add(name); continue; }\n    const key = kind.name + '|' + name + '|' + (bin.fileSize || '');\n    if (!best[kind.name] || when >= best[kind.name].when) {\n      best[kind.name] = { kind: kind.name, name, key, when, prop, item };\n    }\n  }\n}\n\nsd.others = [...others];\n\nconst out = [];\nfor (const b of Object.values(best)) {\n  if (sd.sent[b.key]) continue; // อัปโหลดไปแล้ววันนี้\n  out.push({\n    json: { kind: b.kind, fileName: b.name, key: b.key, folderId: sd.folderId || '' },\n    binary: { data: b.item.binary[b.prop] },\n  });\n}\nreturn out;\n"
+        "jsCode": "// คัดไฟล์ Playlist ของ \"วันนี้\" จากอีเมล 2 วันล่าสุด (เผื่อ Playlist ส่งมาตั้งแต่เย็นวันก่อน)\n// วันที่ของไฟล์ดูจากชื่อไฟล์ก่อน เช่น 2026_10_09, 2026_Oct_09, 9-10-26, 9 Oct 2026 — ถ้าชื่อไม่มีวันที่ ใช้วันที่ของอีเมล\n// เก็บทุกไฟล์ที่เข้า 11 แบบ (บางวันมีมากกว่า 1 ไฟล์ต่อแบบ เช่น Signature Max ฉบับระหว่างวัน) และไม่อัปโหลดไฟล์เดิมซ้ำ\nconst cfg = $('ตั้งค่า').first().json;\nconst kinds = cfg.kinds.map(k => ({ name: k.name, re: new RegExp(k.pattern, 'i') }));\nconst sd = $getWorkflowStaticData('global');\nconst today = $now.setZone('Asia/Bangkok').toFormat('yyyy-MM-dd');\nif (sd.day !== today) { sd.day = today; sd.sent = {}; sd.folderId = ''; }\n\n// ---- อ่านวันที่จากชื่อไฟล์ (กติกาเดียวกับ playlist_system.html) ----\nconst MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };\nconst THM = { 'มค': 0, 'กพ': 1, 'มีค': 2, 'เมย': 3, 'พค': 4, 'มิย': 5, 'กค': 6, 'สค': 7, 'กย': 8, 'ตค': 9, 'พย': 10, 'ธค': 11 };\nconst thisYear = +today.slice(0, 4);\nconst yy = y => { y = +y; if (y < 100) y += y >= 60 ? 2500 : 2000; if (y > 2400) y -= 543; return y; };\nconst ymd = (y, m, d) => (m >= 0 && m < 12 && d >= 1 && d <= 31)\n  ? `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}` : null;\nfunction nameDate(n) {\n  n = String(n).replace(/\\.xls[xm]?$/i, '');\n  let m = n.match(/(?:^|[^\\d])(\\d{4})[-_. ](\\d{1,2})[-_. ](\\d{1,2})(?!\\d)/);\n  if (m) return ymd(yy(m[1]), +m[2] - 1, +m[3]);\n  m = n.match(/(?:^|[^\\d])(\\d{4})[-_. ]?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[-_. ]?(\\d{1,2})(?!\\d)/i);\n  if (m) return ymd(yy(m[1]), MON[m[2].toLowerCase()], +m[3]);\n  m = n.match(/(?:^|[^\\d])(\\d{1,2})[-_.](\\d{1,2})[-_.](\\d{2,4})(?!\\d)/);\n  if (m) return ymd(yy(m[3]), +m[2] - 1, +m[1]);\n  m = n.replace(/\\s+/g, '').match(/(\\d{1,2})(ม\\.?ค\\.?|ก\\.?พ\\.?|มี\\.?ค\\.?|เม\\.?ย\\.?|พ\\.?ค\\.?|มิ\\.?ย\\.?|ก\\.?ค\\.?|ส\\.?ค\\.?|ก\\.?ย\\.?|ต\\.?ค\\.?|พ\\.?ย\\.?|ธ\\.?ค\\.?)(\\d{2,4})?/);\n  if (m) return ymd(m[3] ? yy(m[3]) : thisYear, THM[m[2].replace(/\\./g, '')], +m[1]);\n  m = n.match(/(?:^|[^A-Za-z\\d])(\\d{1,2})[-_ ]?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[-_ ]?(\\d{2,4})?(?![A-Za-z])/i);\n  if (m) return ymd(m[3] ? yy(m[3]) : thisYear, MON[m[2].toLowerCase()], +m[1]);\n  return null;\n}\nconst bkkDay = d => { const t = new Date(d).getTime(); return t ? new Date(t + 7 * 3600e3).toISOString().slice(0, 10) : null; };\n\nconst files = {};\nconst others = new Set(); // ไฟล์ Excel ของวันนี้ที่ชื่อไม่ตรง 11 แบบ\nfor (const item of $input.all()) {\n  const mailDay = bkkDay(item.json.date);\n  for (const bin of Object.values(item.binary || {})) {\n    const name = (bin.fileName || '').normalize('NFC');\n    if (!/\\.xlsx?$/i.test(name)) continue;\n    const day = nameDate(name) || mailDay;\n    if (day !== today) continue; // ไฟล์ของวันอื่น\n    const kind = kinds.find(k => k.re.test(name));\n    if (!kind) { others.add(name); continue; }\n    const key = name + '|' + (bin.fileSize || '');\n    if (!files[key]) files[key] = { kind: kind.name, name, key, bin }; // ไฟล์เดียวกันแนบมาหลายอีเมล = นับครั้งเดียว\n  }\n}\nsd.others = [...others];\n\nreturn Object.values(files)\n  .filter(f => !sd.sent[f.key]) // อัปโหลดไปแล้ววันนี้\n  .map(f => ({\n    json: { kind: f.kind, fileName: f.name, key: f.key, folderId: sd.folderId || '' },\n    binary: { data: f.bin },\n  }));\n"
       },
-      "id": "0036504c-20b5-4b40-9c05-099bed589595",
+      "id": "9d2cc1e6-4d27-4319-b520-afb20b82ce49",
       "name": "คัดไฟล์ Playlist",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -95,7 +95,7 @@
           },
           "conditions": [
             {
-              "id": "93462bdf-d196-4c2f-bea4-dea42722dc90",
+              "id": "f9a42876-c541-433a-be10-f7e65add177f",
               "leftValue": "={{ $json.folderId }}",
               "rightValue": "",
               "operator": {
@@ -109,7 +109,7 @@
         },
         "options": {}
       },
-      "id": "1732a77f-87f4-4cb8-941d-f46dd7c6aecc",
+      "id": "767a7654-5ea4-4705-ac57-8e36911cfae9",
       "name": "มีโฟลเดอร์วันนี้แล้ว?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
@@ -136,7 +136,7 @@
         },
         "options": {}
       },
-      "id": "0ac40db1-2a38-4fd5-a9fc-5cdb72491d65",
+      "id": "0f3ac64f-0786-4653-87ec-afdaa3a7939b",
       "name": "สร้างโฟลเดอร์วันนี้",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
@@ -150,7 +150,7 @@
       "parameters": {
         "jsCode": "// จำ ID โฟลเดอร์ของวันนี้ แล้วส่งไฟล์ทั้งหมดต่อไปอัปโหลด\nconst sd = $getWorkflowStaticData('global');\nconst folderId = $input.first().json.id;\nsd.folderId = folderId;\nreturn $('คัดไฟล์ Playlist').all().map(i => ({\n  json: { ...i.json, folderId },\n  binary: i.binary,\n}));\n"
       },
-      "id": "09a0e0e1-d245-433c-a3a1-26adcfe8c39c",
+      "id": "5da2649d-a897-465d-819c-f80ecdc9e1be",
       "name": "จำโฟลเดอร์วันนี้",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -178,7 +178,7 @@
         "inputDataFieldName": "data",
         "options": {}
       },
-      "id": "8fb366dd-5e94-48e2-b9c5-b167ccfa9aae",
+      "id": "ef7b4f0a-9d98-49ce-a884-31265f647d90",
       "name": "อัปโหลดลง Google Drive",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
@@ -189,9 +189,9 @@
     },
     {
       "parameters": {
-        "jsCode": "// บันทึกว่าอัปโหลดไฟล์ไหนแล้ว และเขียนอีเมลสรุปว่าวันนี้ได้ครบ 11 ไฟล์หรือยัง\nconst cfg = $('ตั้งค่า').first().json;\nconst sd = $getWorkflowStaticData('global');\nconst picked = $('คัดไฟล์ Playlist').all();\nconst before = new Set(Object.values(sd.sent));\nconst replaced = picked.filter(p => before.has(p.json.kind)).map(p => p.json.kind);\nfor (const p of picked) sd.sent[p.json.key] = p.json.kind;\n\nconst all = cfg.kinds.map(k => k.name);\nconst have = new Set(Object.values(sd.sent));\nconst missing = all.filter(k => !have.has(k));\nconst day = $now.setZone('Asia/Bangkok').setLocale('th').toFormat('d LLL yyyy');\nconst link = 'https://drive.google.com/drive/folders/' + sd.folderId;\nconst esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');\n\nconst status = missing.length\n  ? `<p>ยังขาด <b>${missing.length}</b> ไฟล์: ${missing.map(esc).join(', ')}</p><p>ระบบจะเช็กอีเมลอีกครั้งในชั่วโมงถัดไป (ถึง 12:00)</p>`\n  : `<p><b>ครบ 11 ไฟล์แล้ว</b> ดาวน์โหลดทั้งโฟลเดอร์ แล้วลากลงระบบเติมใบเช็ครูปได้เลย</p>`;\n\nconst html = `<div style=\"font-family:Tahoma,sans-serif;font-size:15px;line-height:1.6\">\n<p>Playlist วันที่ ${esc(day)} — ได้แล้ว <b>${have.size}/${all.length}</b> ไฟล์</p>\n<p>ไฟล์ที่เพิ่งเข้าโฟลเดอร์รอบนี้:</p>\n<ul>${picked.map(p => `<li>${esc(p.json.kind)}: ${esc(p.json.fileName)}</li>`).join('')}</ul>\n${status}\n${replaced.length ? `<p style=\"color:#b35a14\"><b>มีไฟล์ฉบับใหม่เข้ามาแทน:</b> ${replaced.map(esc).join(', ')} — ลบไฟล์เก่าของแบบนี้ในโฟลเดอร์ก่อนนำไปใช้</p>` : ''}\n${(sd.others || []).length ? `<p style=\"color:#586274\">ไฟล์ Excel อื่นในอีเมลวันนี้ (ไม่ได้เก็บ เพราะชื่อไม่ตรง 11 แบบ):</p><ul style=\"color:#586274\">${sd.others.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}\n<p><a href=\"${link}\">เปิดโฟลเดอร์ Google Drive ของวันนี้</a></p>\n</div>`;\n\nreturn [{\n  json: {\n    to: cfg.notifyEmail,\n    subject: `Playlist ${day}: ${have.size}/${all.length} ไฟล์` + (missing.length ? ' (ยังไม่ครบ)' : ' — ครบแล้ว'),\n    html,\n  },\n}];\n"
+        "jsCode": "// บันทึกว่าอัปโหลดไฟล์ไหนแล้ว และเขียนอีเมลสรุปว่าวันนี้ได้ครบ 11 แบบหรือยัง\nconst cfg = $('ตั้งค่า').first().json;\nconst sd = $getWorkflowStaticData('global');\nconst picked = $('คัดไฟล์ Playlist').all();\nfor (const p of picked) sd.sent[p.json.key] = p.json.kind;\n\nconst all = cfg.kinds.map(k => k.name);\nconst counts = {};\nfor (const k of Object.values(sd.sent)) counts[k] = (counts[k] || 0) + 1;\nconst haveN = all.filter(k => counts[k]).length;\nconst missing = all.filter(k => !counts[k]);\nconst multi = all.filter(k => counts[k] > 1);\nconst day = $now.setZone('Asia/Bangkok').setLocale('th').toFormat('d LLL yyyy');\nconst link = 'https://drive.google.com/drive/folders/' + sd.folderId;\nconst esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');\n\nconst status = missing.length\n  ? `<p>ยังขาด <b>${missing.length}</b> แบบ: ${missing.map(esc).join(', ')}</p><p>ระบบจะเช็กอีเมลทุกชั่วโมงจนถึง 18:00</p>`\n  : `<p><b>ครบ 11 แบบแล้ว</b> ดาวน์โหลดทั้งโฟลเดอร์ แล้วลากลงระบบเติมใบเช็ครูปได้เลย</p>`;\n\nconst html = `<div style=\"font-family:Tahoma,sans-serif;font-size:15px;line-height:1.6\">\n<p>Playlist วันที่ ${esc(day)} — ได้แล้ว <b>${haveN}/${all.length}</b> แบบ</p>\n<p>ไฟล์ที่เพิ่งเข้าโฟลเดอร์รอบนี้:</p>\n<ul>${picked.map(p => `<li>${esc(p.json.kind)}: ${esc(p.json.fileName)}</li>`).join('')}</ul>\n${status}\n${multi.length ? `<p style=\"color:#b35a14\"><b>บางแบบมีมากกว่า 1 ไฟล์:</b> ${multi.map(k => `${esc(k)} (${counts[k]} ไฟล์)`).join(', ')} — ตรวจว่าต้องใช้ฉบับไหน หรือใช้ทั้งหมด ก่อนลากลงระบบ</p>` : ''}\n${(sd.others || []).length ? `<p style=\"color:#586274\">ไฟล์ Excel อื่นของวันนี้ (ไม่ได้เก็บ เพราะชื่อไม่ตรง 11 แบบ):</p><ul style=\"color:#586274\">${sd.others.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}\n<p><a href=\"${link}\">เปิดโฟลเดอร์ Google Drive ของวันนี้</a></p>\n</div>`;\n\nreturn [{\n  json: {\n    to: cfg.notifyEmail,\n    subject: `Playlist ${day}: ${haveN}/${all.length} แบบ` + (missing.length ? ' (ยังไม่ครบ)' : ' — ครบแล้ว'),\n    html,\n  },\n}];\n"
       },
-      "id": "763dc605-3094-407a-8944-66b6a82a8bbc",
+      "id": "446c6dec-1cb0-439b-9dd5-6a79c34e8736",
       "name": "สรุปผล",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -210,7 +210,7 @@
           "appendAttribution": false
         }
       },
-      "id": "8e8ffc45-dd8c-4315-b35b-400a5a8ae9d8",
+      "id": "cd5ad05c-789b-49cf-9723-05b66b1e1eec",
       "name": "แจ้งเตือนทางอีเมล",
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
@@ -221,7 +221,7 @@
     }
   ],
   "connections": {
-    "ทุกเช้า 8:00–12:00": {
+    "ทุกชั่วโมง 7:00–18:00": {
       "main": [
         [
           {
@@ -236,14 +236,14 @@
       "main": [
         [
           {
-            "node": "อีเมลที่มีไฟล์ Excel วันนี้",
+            "node": "อีเมลที่มีไฟล์ Excel 2 วันล่าสุด",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "อีเมลที่มีไฟล์ Excel วันนี้": {
+    "อีเมลที่มีไฟล์ Excel 2 วันล่าสุด": {
       "main": [
         [
           {
