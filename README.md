@@ -8,7 +8,7 @@
 
 ## วิธีเปิด
 
-- **เปิดจากลิงก์:** https://aofzero.github.io/playlist_system/
+- **เปิดจากลิงก์:** https://playlist-system.github.io/playlist_system/
 - หรือดาวน์โหลด `playlist_system.html` แล้วดับเบิลคลิกเปิดในเบราว์เซอร์ (ใช้แบบออฟไลน์ได้)
 
 ## วิธีใช้ประจำวัน
